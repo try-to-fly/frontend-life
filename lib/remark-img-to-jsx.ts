@@ -10,6 +10,8 @@ type ImageNode = Parent & {
   attributes: (Literal & { name: string })[]
 }
 
+const pathReg = /\.\.\/\.\.\/\.\.\/public/
+
 export default function remarkImgToJsx() {
   return (tree: Node) => {
     visit(
@@ -19,8 +21,10 @@ export default function remarkImgToJsx() {
         node.type === 'paragraph' && node.children.some((n) => n.type === 'image'),
       (node: Parent) => {
         const imageNode = node.children.find((n) => n.type === 'image') as ImageNode
-
         // only local files
+        if (pathReg.test(imageNode.url)) {
+          imageNode.url = imageNode.url.replace(pathReg, '')
+        }
         if (fs.existsSync(`${process.cwd()}/public${imageNode.url}`)) {
           const dimensions = sizeOf(`${process.cwd()}/public${imageNode.url}`)
 
