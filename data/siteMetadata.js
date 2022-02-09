@@ -12,10 +12,10 @@ const siteMetadata = {
   socialBanner: '/static/images/twitter-card.png',
   email: 'wang1234561211+blog@gmail.com',
   github: 'https://github.com/purely-smile',
-  twitter: 'https://twitter.com/Twitter',
-  facebook: 'https://facebook.com',
-  youtube: 'https://youtube.com',
-  linkedin: 'https://www.linkedin.com',
+  twitter: 'https://twitter.com/wang12345612111',
+  // facebook: 'https://facebook.com',
+  // youtube: 'https://youtube.com',
+  // linkedin: 'https://www.linkedin.com',
   locale: 'zh-CN',
   analytics: {
     // supports plausible, simpleAnalytics, umami or googleAnalytics
