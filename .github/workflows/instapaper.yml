@@ -1,0 +1,29 @@
+name: instapaper
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    # Runs "每天0点执行" (see https://crontab.guru)
+    - cron: '0 0 * * *'
+
+jobs:
+  generator:
+    runs-on: ubuntu-latest
+    env:
+      DROPBOX_ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
+      INSTAPAPER_ID: ${{ secrets.INSTAPAPER_ID }}
+      INSTAPAPER_PASSWORD: ${{ secrets.INSTAPAPER_PASSWORD }}
+      INSTAPAPER_ROBOT: ${{ secrets.INSTAPAPER_ROBOT }}
+      INSTAPAPER_SECRET: ${{ secrets.INSTAPAPER_SECRET }}
+      INSTAPAPER_USERNAME: ${{ secrets.INSTAPAPER_USERNAME }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 16.x
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16.x
+        cache: 'yarn'
+    - run: yarn
+    - run: node scripts/generate-instapaper.mjs

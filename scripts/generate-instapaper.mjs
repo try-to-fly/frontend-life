@@ -1,10 +1,20 @@
 import { Feed } from 'feed'
 import fs from 'fs-extra'
+import tempy from 'tempy'
 import { getInstapaperData } from './instapaper/index.mjs'
+import { dropboxUpload, dropboxDownload } from './dropbox.mjs'
+
+const rssFilePath = tempy.file({ name: 'instapaper.xml' })
+const instapaperFilePath = tempy.file({ name: 'instapaper-data.json' })
 
 // eslint-disable-next-line import/no-anonymous-default-export
 const generateInstapaper = async () => {
-  const data = await getInstapaperData()
+  const cachedJson = await dropboxDownload('/instapaper/instapaper-data.json')
+    .then((val) => JSON.parse(val))
+    .catch(() => null)
+  const data = await getInstapaperData(cachedJson)
+  fs.writeJSONSync(instapaperFilePath, data)
+  console.log('generateInstapaper success', instapaperFilePath)
   const feed = new Feed({
     title: 'X-life-Instapaper',
     description: 'Instapaper收藏的文章',
@@ -23,8 +33,13 @@ const generateInstapaper = async () => {
     })
   })
   console.log('xml 生成成功')
-  fs.writeFileSync('public/instapaper.xml', feed.rss2())
-  console.log('xml 写入成功')
+  const rssData = feed.rss2()
+  fs.writeFileSync(rssFilePath, rssData)
+  console.log('xml 写入成功', rssFilePath)
+
+  // dropbox文件上传
+  await dropboxUpload(rssFilePath)
+  await dropboxUpload(instapaperFilePath)
 }
 
 generateInstapaper().catch((error) => {

@@ -10,8 +10,6 @@ if (isDevelopment) {
     path: path.resolve(process.cwd(), '.env.local'),
   })
 }
-console.log(process.env)
-
 const { INSTAPAPER_ID, INSTAPAPER_SECRET, INSTAPAPER_USERNAME, INSTAPAPER_PASSWORD } = process.env
 
 const client = new Instapaper(INSTAPAPER_ID, INSTAPAPER_SECRET)
