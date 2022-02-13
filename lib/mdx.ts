@@ -43,9 +43,9 @@ export function dateSortDesc(a: string, b: string) {
 export async function getFileBySlug<T>(type: 'authors' | 'blog', slug: string | string[]) {
   const mdxPath = path.join(root, 'data', type, `${slug}.mdx`)
   const mdPath = path.join(root, 'data', type, `${slug}.md`)
-  const source = fs.existsSync(mdxPath)
-    ? fs.readFileSync(mdxPath, 'utf8')
-    : fs.readFileSync(mdPath, 'utf8')
+  const source = formatImgTag(
+    fs.existsSync(mdxPath) ? fs.readFileSync(mdxPath, 'utf8') : fs.readFileSync(mdPath, 'utf8')
+  )
 
   // https://github.com/kentcdodds/mdx-bundler#nextjs-esbuild-enoent
   if (process.platform === 'win32') {
@@ -137,4 +137,26 @@ export async function getAllFilesFrontMatter(folder: 'blog') {
   })
 
   return allFrontMatter.sort((a, b) => dateSortDesc(a.date, b.date))
+}
+
+function formatImgTag(source: string) {
+  return source.replace(/\.\.\/\.\.\/\.\.\/public/g, '').replace(/style="[^"]+;"/g, (str) => {
+    return str.replace(/"([^"]+;)"/, (s, p1) => `{${JSON.stringify(styleToObj(p1))}}`)
+  })
+}
+
+function styleToObj(styleInput: string) {
+  if (typeof styleInput !== 'string') {
+    return styleInput
+  }
+  const obj = styleInput
+    .split(';')
+    .filter(Boolean)
+    .reduce(function (ruleMap, ruleString) {
+      const rulePair = ruleString.split(':')
+      ruleMap[rulePair[0]?.trim()] = rulePair[1]?.trim()
+
+      return ruleMap
+    }, {})
+  return obj
 }
