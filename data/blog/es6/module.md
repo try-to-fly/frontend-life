@@ -6,8 +6,6 @@ draft: false
 summary: Es6 模块介绍。关于 commonJs、EsModule区别
 ---
 
-# Es6 模块介绍
-
 ### 前言
 
 本文仅概要记录模块相关信息，具体细节详见尾部参考链接

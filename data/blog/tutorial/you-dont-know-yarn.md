@@ -6,8 +6,6 @@ draft: false
 summary: Yarn包管理器使用介绍
 ---
 
-# 你不知道的 Yarn
-
 ### 前言
 
 使用 Yarn 好多年了，常用的命令也只有：`yarn install`、`yarn add`、`yarn why`这几个命令。最近查看[redux-toolkit](https://github.com/reduxjs/redux-toolkit/blob/master/package.json)的源码，pkg 里面使用的`resolutions`和`patch`协议挺有趣的，所以近期又抽空阅读了一下`yarn`的文档，整理了一些感兴趣的知识点。<img src="../../../public/static/md-img/image-20220218073354965.png" alt="image-20220218073354965" style="zoom: 33%;" />
@@ -50,10 +48,9 @@ summary: Yarn包管理器使用介绍
 
 2. 配置编辑器，具体[参考](https://yarnpkg.com/getting-started/editor-sdks)，仅以`vscode`为例。
 
-
-     - 安装[ZipFS插件](https://marketplace.visualstudio.com/items?itemName=arcanis.vscode-zipfs)。
-     - 项目中执行：`yarn dlx @yarnpkg/sdks vscode`
-     - 选择Typescipt为工作区版本。
+   - 安装[ZipFS 插件](https://marketplace.visualstudio.com/items?itemName=arcanis.vscode-zipfs)。
+   - 项目中执行：`yarn dlx @yarnpkg/sdks vscode`
+   - 选择 Typescipt 为工作区版本。
 
 ### 遇到的问题
 

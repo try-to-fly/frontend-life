@@ -6,8 +6,6 @@ draft: false
 summary: typescript升级流程
 ---
 
-# 升级 Typescript 到 v3 版本
-
 ### 前言
 
 > v4 版本刚出的时候，尝试升级了。但是 error 都是 unkown 的报错，然后项目中需要修改大量的代码，就放弃了。没想到随后出来这个配置项：`useUnknownInCatchVariables`可以关闭这个错误提示。

@@ -6,8 +6,6 @@ draft: false
 summary: Mac系统，前端开发环境
 ---
 
-# Mac-前端开发环境配置
-
 ## 一、网络加速
 
 1. [V2rayU](https://github.com/yanue/V2rayU)：支持 ss 和 v2ray，可以一键导入配置

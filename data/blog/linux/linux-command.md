@@ -6,8 +6,6 @@ draft: false
 summary: 分享一些自己常用的Linux命令
 ---
 
-# Linux 常用命令
-
 ### 一些问题：
 
 1. 如何查看电脑网络状况？
