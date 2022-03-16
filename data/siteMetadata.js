@@ -6,7 +6,7 @@ const siteMetadata = {
   language: 'zh-CN',
   theme: 'system', // system, dark or light
   siteUrl: 'https://www.x-life.top',
-  siteRepo: 'https://github.com/purely-smile/frontend-life.git',
+  siteRepo: 'https://github.com/purely-smile/frontend-life',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.JPG',
   socialBanner: '/static/images/twitter-card.png',
