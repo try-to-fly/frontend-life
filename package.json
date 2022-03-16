@@ -11,6 +11,9 @@
     "lint": "next lint --fix --dir pages --dir components --dir lib --dir layouts --dir scripts",
     "prepare": "husky install"
   },
+  "resolutions": {
+    "prismjs": "1.27.0"
+  },
   "dependencies": {
     "@mailchimp/mailchimp_marketing": "^3.0.58",
     "@tailwindcss/forms": "^0.4.0",
