@@ -23,12 +23,13 @@ const generateInstapaper = async () => {
     link: 'https://x-life.top',
   })
   data.items.forEach((item) => {
+    const title = `【${item.foldName}】${item.title}`
     feed.addItem({
-      title: `【${item.foldName}】${item.title}`,
+      title,
       id: item.url,
       link: item.url,
       description: item.title,
-      content: item.content,
+      content: title,
       date: new Date(item.time),
     })
   })
