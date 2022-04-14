@@ -3,12 +3,10 @@ title: 修复yarn安装报错：computed integrity doesn't match our records
 tags: ['yarn']
 date: 2022-04-12
 draft: false
-summary: 使用yarn安装依赖的时候一直报这个错误，然后一直使用`yarn cache clean --force`来尝试删除，发现一直无法解决问题，直到阅读了一下文档，才发现命令参数用错了。
+summary: 使用yarn安装依赖的时候一直报这个错误
 ---
 
 ### 遇到的问题
-
-使用 yarn 安装依赖的时候一直报这个错误，然后一直使用`yarn cache clean --force`来尝试删除，发现一直无法解决问题，直到阅读了一下文档，才发现命令参数用错了。
 
 computed integrity doesn't match our records
 
@@ -16,24 +14,19 @@ computed integrity doesn't match our records
 
 ### 解决方案：
 
-1. 删除 yarn.lock 重新安装依赖。
+1. 删除 yarn.lock 中报错依赖信息
 
-   ```
-   rm -rf yarn.lock
-   ```
+- 比如上述报错信息中的@babel/parser
 
-2. 清除 caceh 重新安装依赖（推荐）。
+2. 执行 yarn 重新安装依赖，用于更新@babel/parser 相关的信息即可。
 
-   ```
-   # 移除所有依赖
-   rm -rf node_modules
-   # 删除全局和本地的缓存
-   yarn cache clean --all
+#### 错误的尝试：
 
-   ```
+1. 使用`yarn cache clean`
+   - 清除缓存并不能解决这个问题，反而导致安装依赖的速度更慢了。
+2. `yarn install --update-checksums`
+   - 这样的话会更新 lock 文件中的所有模版的信息，比较简单粗暴。
 
-   1. 坑点：需要在项目目录外执行，不然仅仅删除 local cache 是有可能无法成功的。
+#### 为什么会这样：
 
-### 参考资料：
-
-1. [yarn cache clean](https://yarnpkg.com/cli/cache/clean)
+> 还在观察中，具体还不知道原因。因为部分人电脑正常，yarn 版本也是一致的，所以就很奇怪了。
